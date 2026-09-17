@@ -1,16 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   codexion.c                                         :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gopiment <gopiment@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 19:17:06 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/14 19:51:17 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/09/17 21:57:26 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "codexion.h"
+
 int main(int argc, char **argv)
 {
-	return ;
+	t_codex *cfg;
+
+	cfg = NULL;
+	parse_args(argc, argv, cfg);
+	return 0;
 }
