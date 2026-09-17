@@ -6,7 +6,7 @@
 /*   By: gopiment <gopiment@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 19:47:31 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/17 21:58:22 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/09/17 22:34:52 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,8 @@ void	assign_numbers(t_codex *cfg, char **argv);
 int		parse_scheduler(char *str, t_scheduler *out);
 int		parse_args(int argc, char **, t_codex *cfg);
 
+/*==========================| UTILS_TIME.C |==========================*/
+long	now_in_ms(void);
+void	precise_wait(long duration, long start_time);
 
 # endif

@@ -15,7 +15,7 @@ NAME	= codexion
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror -pthread
 
-SRCS	= main.c parser.c
+SRCS	= main.c parser.c utils_time.c
 OBJS	= $(SRCS:.c=.o)
 
 all: $(NAME)
