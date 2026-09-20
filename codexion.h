@@ -6,7 +6,7 @@
 /*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 19:47:31 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/20 05:27:19 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/09/20 05:46:02 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	precise_wait(long duration, long start_time);
 
 /*==========================| INIT.C |==========================*/
 int		init_sim(t_sim *sim);
-void	init_mutexes(t_sim *sim);
+int		init_mutexes(t_sim *sim);
+void	destroy_mutexes(t_sim *sim, int count);
 
 # endif
