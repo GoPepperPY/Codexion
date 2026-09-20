@@ -1,33 +1,24 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:     #
-#                                                     +:+ +:+         +:+       #
-#    By: gopiment <gopiment@student.42porto.com>    +#+  +:+       +#+          #
-#                                                 +#+#+#+#+#+   +#+             #
-#    Created: 2026/09/17 20:40:00 by gopiment          #+#    #+#              #
-#    Updated: 2026/09/17 20:40:00 by gopiment         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 NAME	= codexion
 
-CC		= cc
+CC	= cc
 CFLAGS	= -Wall -Wextra -Werror -pthread
 
-SRCS	= main.c parser.c utils_time.c
-OBJS	= $(SRCS:.c=.o)
+OBJ_DIR	= objs
+
+SRCS	= main.c parser.c utils_time.c init.c
+OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c codexion.h
+$(OBJ_DIR)/%.o: %.c codexion.h
+	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)
