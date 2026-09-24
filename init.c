@@ -6,7 +6,7 @@
 /*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 04:22:06 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/20 05:48:59 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/09/22 18:26:36 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,3 @@ int	init_mutexes(t_sim *sim)
 	}
 	return (1);
 }
-
-// study better this one
