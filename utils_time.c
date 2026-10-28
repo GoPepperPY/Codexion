@@ -28,3 +28,13 @@ void	precise_wait(long duration, long start_time)
 	while ((now_in_ms() - start_time) - begin < duration)
 		usleep(200);
 }
+
+int     should_stop(t_sim *sim)
+{
+	int	stopped;
+
+	pthread_mutex_lock(&sim->sim_lock);
+	stopped = sim->stop;
+	pthread_mutex_unlock(&sim->sim_lock);
+	return (stopped);
+}

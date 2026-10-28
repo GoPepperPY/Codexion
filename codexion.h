@@ -67,7 +67,7 @@ typedef struct s_sim
 	t_codex			cfg;
 	long			start_time;
 	t_dongle		*dongles;
-	t_coder			*coders;
+	t_coder			*coder;
 	pthread_mutex_t	print_lock;
 	pthread_mutex_t	sim_lock;
 	int				stop;
@@ -85,11 +85,18 @@ int		parse_args(int argc, char **, t_codex *cfg);
 /*==========================| UTILS_TIME.C |==========================*/
 long	now_in_ms(void);
 void	precise_wait(long duration, long start_time);
-
+int		should_stop(t_sim *sim);
 
 /*==========================| INIT.C |==========================*/
 int		init_sim(t_sim *sim);
 int		init_mutexes(t_sim *sim);
 void	destroy_mutexes(t_sim *sim, int count);
+void	cleanup(t_sim *sim);
+
+/*==========================| SIM.C |==========================*/
+void	log_state(t_coder *coder, const char *msg);
+
+/*==========================| CODER_ROUTINE.C |==========================*/
+void	*coder_routine(void *data);
 
 # endif

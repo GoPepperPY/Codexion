@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "codexion.h"
- 
+
 int	is_positive_integer(const char *str)
 {
 	int	i;
@@ -27,7 +27,7 @@ int	is_positive_integer(const char *str)
 	}
 	return (1);
 }
- 
+
 int	validate_numbers(char **argv)
 {
 	int	i;
@@ -41,7 +41,7 @@ int	validate_numbers(char **argv)
 	}
 	return (1);
 }
- 
+
 void	assign_numbers(t_codex *cfg, char **argv)
 {
 	cfg->coders = atoi(argv[1]);
@@ -63,7 +63,7 @@ int	parse_scheduler(char *str, t_scheduler *out)
 		return (0);
 	return (1);
 }
- 
+
 int	parse_args(int argc, char **argv, t_codex *cfg)
 {
 	if (argc != 9)

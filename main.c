@@ -22,13 +22,22 @@
 // dongle_cooldown
 // scheduler
 
-int	main(int argc, char **argv)
+int   main(int argc, char **argv)
 {
 	t_sim	sim;
+	int		i;
 
 	if (!parse_args(argc, argv, &sim.cfg))
 		return (1);
 	if (!init_sim(&sim))
 		return (1);
+	i = -1;
+	while (++i < sim.cfg.coders)
+		pthread_create(&sim.coder[i].thread, NULL, coder_routine, &sim.coder[i]);
+	i = -1;
+	// wait for its thread to finish
+	while (++i < sim.cfg.coders)
+		pthread_join(sim.coder[i].thread, NULL);
+	cleanup(&sim);
 	return (0);
 }
