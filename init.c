@@ -6,13 +6,12 @@
 /*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/20 04:22:06 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/22 18:26:36 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/11/05 19:46:48 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
-//Destroys the first count dongle and coder mutexes; used to roll back cleanly if init fails partway.
 void	destroy_mutexes(t_sim *sim, int count)
 {
 	int	i;
@@ -25,7 +24,6 @@ void	destroy_mutexes(t_sim *sim, int count)
 	}
 }
 
-//Allocates the coder and dongle arrays, sets their ids and back-pointers, initializes all mutexes, and records the simulation start time.
 int	init_sim(t_sim *sim)
 {
 	int	counter;
@@ -43,7 +41,7 @@ int	init_sim(t_sim *sim)
 		sim->coder[counter].sim = sim;
 		sim->dongles[counter].id = counter + 1;
 		sim->dongles[counter].sim = sim;
-		sim->coder[counter].left  = counter;
+		sim->coder[counter].left = counter;
 		sim->coder[counter].right = (counter + 1) % sim->cfg.coders;
 	}
 	if (!init_mutexes(sim))
@@ -54,7 +52,6 @@ int	init_sim(t_sim *sim)
 	return (1);
 }
 
-//Initializes every dongle lock, coder state lock, and the shared print/sim locks, undoing what was already done if any init fails.
 int	init_mutexes(t_sim *sim)
 {
 	int	counter;
@@ -80,7 +77,7 @@ int	init_mutexes(t_sim *sim)
 	return (1);
 }
 
-void  cleanup(t_sim *sim)
+void	cleanup(t_sim *sim)
 {
 	destroy_mutexes(sim, sim->cfg.coders);
 	pthread_mutex_destroy(&sim->print_lock);

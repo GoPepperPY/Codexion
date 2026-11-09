@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gopiment <gopiment@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 21:42:01 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/17 22:00:59 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/11/05 19:44:13 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	is_positive_integer(const char *str)
 {
 	int	i;
- 
-	i = 0;	
+
+	i = 0;
 	if (!str || !str[0] || strlen(str) > 10)
 		return (0);
 	while (str[i])
@@ -31,7 +31,7 @@ int	is_positive_integer(const char *str)
 int	validate_numbers(char **argv)
 {
 	int	i;
- 
+
 	i = 1;
 	while (i <= 7)
 	{
@@ -52,7 +52,7 @@ void	assign_numbers(t_codex *cfg, char **argv)
 	cfg->number_of_compiles_required = atoi(argv[6]);
 	cfg->dongle_cooldown = atoi(argv[7]);
 }
- 
+
 int	parse_scheduler(char *str, t_scheduler *out)
 {
 	if (strcmp(str, "fifo") == 0)

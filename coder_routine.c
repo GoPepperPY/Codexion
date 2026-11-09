@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   coder_routine.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/11/02 15:32:17 by gopiment          #+#    #+#             */
+/*   Updated: 2026/11/05 19:48:54 by gopiment         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "codexion.h"
 
-static void   set_order(t_coder *coder, int *first, int *second)
+static void	set_order(t_coder *coder, int *first, int *second)
 {
 	if (coder->left < coder->right)
 	{
@@ -14,7 +26,7 @@ static void   set_order(t_coder *coder, int *first, int *second)
 	}
 }
 
-static void   take_dongles(t_coder *coder, int first, int second)
+static void	take_dongles(t_coder *coder, int first, int second)
 {
 	pthread_mutex_lock(&coder->sim->dongles[first].lock);
 	log_state(coder, "has taken a dongle");
@@ -22,7 +34,7 @@ static void   take_dongles(t_coder *coder, int first, int second)
 	log_state(coder, "has taken a dongle");
 }
 
-static void   compile_phase(t_coder *coder, int first, int second)
+static void	compile_phase(t_coder *coder, int first, int second)
 {
 	pthread_mutex_lock(&coder->state_lock);
 	coder->last_compile_start = now_in_ms() - coder->sim->start_time;
@@ -36,7 +48,7 @@ static void   compile_phase(t_coder *coder, int first, int second)
 	pthread_mutex_unlock(&coder->state_lock);
 }
 
-void  *coder_routine(void *data)
+void	*coder_routine(void *data)
 {
 	t_coder	*coder;
 	int		first;
@@ -44,6 +56,15 @@ void  *coder_routine(void *data)
 
 	coder = (t_coder *)data;
 	set_order(coder, &first, &second);
+	if (coder->left == coder->right)
+	{
+		pthread_mutex_lock(&coder->sim->dongles[coder->left].lock);
+		log_state(coder, "has taken a dongle");
+		while (!should_stop(coder->sim))
+			usleep(200);
+		pthread_mutex_unlock(&coder->sim->dongles[coder->left].lock);
+		return (NULL);
+	}
 	while (!should_stop(coder->sim))
 	{
 		take_dongles(coder, first, second);

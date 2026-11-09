@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   utils_time.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gopiment <gopiment@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/17 22:30:27 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/17 22:30:43 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/11/05 19:43:01 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	precise_wait(long duration, long start_time)
 		usleep(200);
 }
 
-int     should_stop(t_sim *sim)
+int	should_stop(t_sim *sim)
 {
 	int	stopped;
 

@@ -6,11 +6,14 @@
 /*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 19:17:06 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/20 04:57:40 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/11/05 19:45:37 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
+#include <bits/pthreadtypes.h>
+#include <pthread.h>
+#include <unistd.h>
 
 // ./codexion
 // number_of_coders
@@ -22,7 +25,7 @@
 // dongle_cooldown
 // scheduler
 
-int   main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_sim	sim;
 	int		i;
@@ -32,10 +35,12 @@ int   main(int argc, char **argv)
 	if (!init_sim(&sim))
 		return (1);
 	i = -1;
+	pthread_create(&sim.monitor, NULL, monitor_routine, &sim);
 	while (++i < sim.cfg.coders)
-		pthread_create(&sim.coder[i].thread, NULL, coder_routine, &sim.coder[i]);
+		pthread_create(&sim.coder[i].thread, NULL, \
+coder_routine, &sim.coder[i]);
 	i = -1;
-	// wait for its thread to finish
+	pthread_join(sim.monitor, NULL);
 	while (++i < sim.cfg.coders)
 		pthread_join(sim.coder[i].thread, NULL);
 	cleanup(&sim);

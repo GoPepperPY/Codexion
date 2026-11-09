@@ -6,7 +6,7 @@
 /*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 19:47:31 by gopiment          #+#    #+#             */
-/*   Updated: 2026/09/20 05:46:02 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/11/05 19:47:59 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_codex
 	t_scheduler	scheduler;
 }	t_codex;
 
-struct s_sim;
+struct	s_sim;
 
 typedef struct s_dongle
 {
@@ -80,7 +80,7 @@ int		is_positive_integer(const char *str);
 int		validate_numbers(char **argv);
 void	assign_numbers(t_codex *cfg, char **argv);
 int		parse_scheduler(char *str, t_scheduler *out);
-int		parse_args(int argc, char **, t_codex *cfg);
+int		parse_args(int argc, char **argv, t_codex *cfg);
 
 /*==========================| UTILS_TIME.C |==========================*/
 long	now_in_ms(void);
@@ -99,4 +99,7 @@ void	log_state(t_coder *coder, const char *msg);
 /*==========================| CODER_ROUTINE.C |==========================*/
 void	*coder_routine(void *data);
 
-# endif
+/*==========================| MONITOR.C |==========================*/
+void	*monitor_routine(void *data);
+
+#endif
