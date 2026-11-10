@@ -6,7 +6,7 @@ CFLAGS	= -Wall -Wextra -Werror -pthread
 OBJ_DIR	= objs
 
 SRCS	=	main.c parser.c utils_time.c init.c sim.c \
-			coder_routine.c monitor.c
+			coder_routine.c monitor.c heap.c heap_utils.c
 OBJS	= $(addprefix $(OBJ_DIR)/, $(SRCS:.c=.o))
 
 all: $(NAME)

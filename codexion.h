@@ -6,7 +6,7 @@
 /*   By: gopiment <gopiment@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/14 19:47:31 by gopiment          #+#    #+#             */
-/*   Updated: 2026/11/05 19:47:59 by gopiment         ###   ########.fr       */
+/*   Updated: 2026/11/10 10:36:55 by gopiment         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,31 +75,53 @@ typedef struct s_sim
 	pthread_t		monitor;
 }	t_sim;
 
+typedef struct s_request
+{
+	int		coder_id;
+	long	seq;
+	long	deadline;
+}	t_request;
+
+typedef struct s_heap
+{
+	t_request	*data;
+	int			size;
+	int			capacity;
+	t_scheduler	scheduler;
+}	t_heap;
+
 /*==========================| PARSER.C |==========================*/
-int		is_positive_integer(const char *str);
-int		validate_numbers(char **argv);
-void	assign_numbers(t_codex *cfg, char **argv);
-int		parse_scheduler(char *str, t_scheduler *out);
-int		parse_args(int argc, char **argv, t_codex *cfg);
+int			is_positive_integer(const char *str);
+int			validate_numbers(char **argv);
+void		assign_numbers(t_codex *cfg, char **argv);
+int			parse_scheduler(char *str, t_scheduler *out);
+int			parse_args(int argc, char **argv, t_codex *cfg);
 
 /*==========================| UTILS_TIME.C |==========================*/
-long	now_in_ms(void);
-void	precise_wait(long duration, long start_time);
-int		should_stop(t_sim *sim);
+long		now_in_ms(void);
+void		precise_wait(long duration, long start_time);
+int			should_stop(t_sim *sim);
 
 /*==========================| INIT.C |==========================*/
-int		init_sim(t_sim *sim);
-int		init_mutexes(t_sim *sim);
-void	destroy_mutexes(t_sim *sim, int count);
-void	cleanup(t_sim *sim);
+int			init_sim(t_sim *sim);
+int			init_mutexes(t_sim *sim);
+void		destroy_mutexes(t_sim *sim, int count);
+void		cleanup(t_sim *sim);
 
 /*==========================| SIM.C |==========================*/
-void	log_state(t_coder *coder, const char *msg);
+void		log_state(t_coder *coder, const char *msg);
 
 /*==========================| CODER_ROUTINE.C |==========================*/
-void	*coder_routine(void *data);
+void		*coder_routine(void *data);
 
 /*==========================| MONITOR.C |==========================*/
-void	*monitor_routine(void *data);
+void		*monitor_routine(void *data);
+
+/*=================| HEAP.C / HEAP_UTILS.C |=================*/
+int			heap_create(t_heap *heap, int capacity, t_scheduler scheduler);
+void		heap_free(t_heap *heap);
+t_request	*heap_peek(t_heap *heap);
+void		heap_push(t_heap *heap, t_request req);
+void		heap_pop(t_heap *heap);
 
 #endif
